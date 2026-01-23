@@ -1,15 +1,15 @@
 package app;
 
 
-import app.model.Administrator;
-import app.model.Klijent;
-import app.model.Trener;
+import app.model.Admin;
+import app.model.Client;
+import app.model.Trainer;
 
 public class Main {
     public static void main(String[] args) {
-        Administrator a = new Administrator();
-        Trener t = new Trener();
-        Klijent k = new Klijent();
+        Admin a = new Admin();
+        Trainer t = new Trainer();
+        Client k = new Client();
 
         System.out.println(a.getUloga());
         System.out.println(t.getUloga());
