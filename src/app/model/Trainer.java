@@ -12,6 +12,11 @@ public class Trainer extends User {
         this.role = Role.TRAINER;
     }
 
+    public Trainer(int id, String username, String password,
+                   String firstName, String lastName,
+                   String email) {
+        super(id, username, password, firstName, lastName, email, Role.TRAINER);
+    }
 
     public Trainer(int id,
                    String username,

@@ -17,6 +17,12 @@ public class Client extends User {
         this.role = Role.CLIENT;
     }
 
+    public Client(int id, String username, String password,
+                  String firstName, String lastName,
+                  String email) {
+        super(id, username, password, firstName, lastName, email, Role.CLIENT);
+    }
+
 
     public Client(double height, double weight, Date dateOfBirth, String healthStatus, String gender, ExerciseType exerciseType) {
         this.role = Role.CLIENT;

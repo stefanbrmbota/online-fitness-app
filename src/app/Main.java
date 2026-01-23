@@ -1,6 +1,10 @@
 package app;
 
 
+import app.dao.UserCsvDao;
+import app.dao.UserDao;
+import app.model.Client;
+import app.model.User;
 import app.util.CsvUtil;
 
 import java.util.ArrayList;
@@ -9,15 +13,15 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        List<String> lines = new ArrayList<>();
-        lines.add("1,test,test123,Test,User,test@mail.com,CLIENT,true");
+        UserDao dao = new UserCsvDao();
 
-        CsvUtil.write("users.csv",
-                "id,username,password,firstName,lastName,email,role,active",
-                lines
-        );
+        User u = new Client(0, "marko", "pass",
+                "Marko", "Markovic", "m@mail.com");
 
-        System.out.println("CSV written");
+        dao.save(u);
+
+        User found = dao.findByUsername("marko");
+        System.out.println(found.getEmail());
 
     }
 }
