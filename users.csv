@@ -1,0 +1,2 @@
+id,username,password,firstName,lastName,email,role,active
+1,test,test123,Test,User,test@mail.com,CLIENT,true

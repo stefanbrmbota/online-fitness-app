@@ -1,18 +1,23 @@
 package app;
 
 
-import app.model.Admin;
-import app.model.Client;
-import app.model.Trainer;
+import app.util.CsvUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Admin a = new Admin();
-        Trainer t = new Trainer();
-        Client k = new Client();
 
-        System.out.println(a.getUloga());
-        System.out.println(t.getUloga());
-        System.out.println(k.getUloga());
+        List<String> lines = new ArrayList<>();
+        lines.add("1,test,test123,Test,User,test@mail.com,CLIENT,true");
+
+        CsvUtil.write("users.csv",
+                "id,username,password,firstName,lastName,email,role,active",
+                lines
+        );
+
+        System.out.println("CSV written");
+
     }
 }
