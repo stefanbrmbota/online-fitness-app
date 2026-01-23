@@ -12,6 +12,10 @@ public class WorkoutPlan {
     private LocalDate creationDate;
     private List<Workout> workouts = new ArrayList<>();
 
+    public WorkoutPlan() {
+    }
+
+
     // Constructor
     public WorkoutPlan(Trainer trainer, Client client) {
         this.trainer = trainer;

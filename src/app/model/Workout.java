@@ -1,5 +1,6 @@
 package app.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,21 +10,19 @@ public class Workout {
     private int id;
     private String name;
     private List<WorkoutItem> items = new ArrayList<>();
-    private Date executionDate;
-    private int rating;
-    private String comment;
+    private LocalDate executionDate;
+
 
 
     public Workout() {
     }
 
 
-    public Workout(int id, String name, Date executionDate, int rating, String comment) {
+    public Workout(int id, String name, LocalDate executionDate) {
         this.id = id;
         this.name = name;
         this.executionDate = executionDate;
-        this.rating = rating;
-        this.comment = comment;
+
     }
 
     // Method to add a WorkoutItem
@@ -56,27 +55,13 @@ public class Workout {
         this.items = items;
     }
 
-    public Date getExecutionDate() {
+    public LocalDate getExecutionDate() {
         return executionDate;
     }
 
-    public void setExecutionDate(Date executionDate) {
+    public void setExecutionDate(LocalDate executionDate) {
         this.executionDate = executionDate;
     }
 
-    public int getRating() {
-        return rating;
-    }
 
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 }
