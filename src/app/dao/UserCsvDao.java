@@ -2,7 +2,6 @@ package app.dao;
 
 import app.model.*;
 import app.util.CsvUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +62,28 @@ public class UserCsvDao implements UserDao {
         writeAll(users);
     }
 
+    //------------------ TRAINER APPROVAL ----------------
+
+    public List<Trainer> findPendingTrainers() {
+        List<Trainer> pending = new ArrayList<>();
+        for (User u : findAll()) {
+            if (u instanceof Trainer && ((Trainer) u).getStatus() == TrainerStatus.PENDING) {
+                pending.add((Trainer) u);
+            }
+        }
+        return pending;
+    }
+
+    public void approveTrainer(Trainer trainer) {
+        trainer.setStatus(TrainerStatus.APPROVED);
+        update(trainer);
+    }
+
+    public void rejectTrainer(Trainer trainer) {
+        trainer.setStatus(TrainerStatus.REJECTED);
+        update(trainer);
+    }
+
     /* ----------------- PRIVATE HELPERS ----------------- */
 
     private User mapRowToUser(String[] r) {
@@ -77,11 +98,21 @@ public class UserCsvDao implements UserDao {
 
         User user;
 
+        TrainerStatus status = TrainerStatus.PENDING;
+
+        if  (role == Role.TRAINER && r.length > 8 && r[8] != null && !r[8].isEmpty()) {
+            status = TrainerStatus.valueOf(r[8]);
+        }
+
+
         switch (role) {
             case ADMIN ->
                     user = new Admin(id, username, password, firstName, lastName, email);
-            case TRAINER ->
-                    user = new Trainer(id, username, password, firstName, lastName, email);
+            case TRAINER -> {
+                    Trainer t = new Trainer(id, username, password, firstName, lastName, email);
+                    t.setStatus(status);
+                    user = t;
+            }
             default ->
                     user = new Client(id, username, password, firstName, lastName, email);
         }
@@ -99,7 +130,7 @@ public class UserCsvDao implements UserDao {
     }
 
     private String mapUserToLine(User u) {
-        return u.getId() + "," +
+        String line = u.getId() + "," +
                 u.getUsername() + "," +
                 u.getPassword() + "," +
                 u.getFirstName() + "," +
@@ -107,6 +138,12 @@ public class UserCsvDao implements UserDao {
                 u.getEmail() + "," +
                 u.getRole() + "," +
                 u.isActive();
+
+        if (u instanceof Trainer) {
+            line += "," + ((Trainer) u).getStatus();
+        }
+
+        return line;
     }
 
 

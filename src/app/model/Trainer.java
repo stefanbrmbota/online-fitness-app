@@ -6,16 +6,19 @@ public class Trainer extends User {
     private String specialty;
     private double averageRating;
     private String qualifications;
+    private TrainerStatus status;
 
 
     public Trainer() {
         this.role = Role.TRAINER;
+        this.status = TrainerStatus.PENDING;
     }
 
     public Trainer(int id, String username, String password,
                    String firstName, String lastName,
                    String email) {
         super(id, username, password, firstName, lastName, email, Role.TRAINER);
+        this.status = TrainerStatus.PENDING;
     }
 
     public Trainer(int id,
@@ -34,6 +37,7 @@ public class Trainer extends User {
         this.specialty = specialty;
         this.averageRating = averageRating;
         this.qualifications = qualifications;
+        this.status = TrainerStatus.PENDING;
     }
 
 
@@ -68,5 +72,13 @@ public class Trainer extends User {
 
     public void setQualifications(String qualifications) {
         this.qualifications = qualifications;
+    }
+
+    public TrainerStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TrainerStatus status) {
+        this.status = status;
     }
 }
